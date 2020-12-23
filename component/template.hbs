@@ -56,11 +56,21 @@
       <div class="row">
         <div class="col span-6">
           <label class="acc-label">vCPU(s)</label>
-          {{input inputmode="numeric" pattern="[0-9]*" min=1 max=32 type="text" class="form-control" value=model.%%DRIVERNAME%%Config.vmCpus }}
+          {{input-integer
+             min=1 
+             max=32
+             class="form-control" 
+             value=model.%%DRIVERNAME%%Config.vmCpus
+          }}
         </div>
         <div class="col span-6">
           <label class="acc-label">Number Of Cores Per vCPU</label>
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.vmCores }}
+          {{input-integer
+            min=1
+            max=8
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.vmCores
+          }}
         </div>
       </div>
 
@@ -68,14 +78,14 @@
         <div class="col span-6">
           <label class="acc-label">Memory</label>
           <div class="input-group">
-            {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.vmMem }}
+            {{input-integer class="form-control" value=model.%%DRIVERNAME%%Config.vmMem }}
             <div class="input-group-addon bg-default">MiB</div>
           </div>
         </div>
         <div class="col span-6">
           <label class="acc-label">Disk</label>
           <div class="input-group">
-            {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.disk }}
+            {{input-integer class="form-control" value=model.%%DRIVERNAME%%Config.disk }}
             <div class="input-group-addon bg-default">GB</div>
           </div>
 
