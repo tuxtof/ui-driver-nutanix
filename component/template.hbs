@@ -1,136 +1,114 @@
 <section class="horizontal-form">
   <div class="container-fluid">
-    {{!-- This partial contains the quantity, name, and description fields --}}
 
-    <div class="over-hr r-mt20 r-mb20">
-      <span>Nutanix options</span>
-    </div>
+    {{!-- This line shows the driver title which you don't have to change it --}}
+    <div class="over-hr"><span>{{driverOptionsTitle}}</span></div>
 
-    <div class="row">
-      <div class="col-sm-12 col-md-2 form-label">
-        <label class="form-control-static">Management Endpoint</label>
-      </div>
-      <div class="col-sm-12 col-md-4">
 
-        {{input type="text"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.endpoint
-          }}
+    {{#accordion-list showExpandAll=false as | al expandFn | }}
+      {{#accordion-list-item 
+        title="1. Account Access"
+        detail="Configure to connect to the Nutanix Prism Element Instance"
+        expandOnInit=true
+        expand=(action expandFn)
+      }}
 
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">Nutanix management endpoint ip address/FQDN:9440</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-2 form-label">
-        <label class="form-control-static">Username</label>
-      </div>
-      <div class="col-md-4">
-        {{input type="text"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.username
-          }}
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">Nutanix management username</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-12 col-md-2 form-label">
-        <label class="form-control-static">Password</label>
-      </div>
-      <div class="col-sm-12 col-md-4">
-        {{input type="password"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.password
-          }}
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">Nutanix management password</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-2 form-label">
-        <label class="form-control-static">vCPU</label>
-      </div>
-      <div class="col-md-4">
-        {{input type="text"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.vmCpus
-          }}
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">Number of VCPUs of the VM to be created</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-2 form-label">
-        <label class="form-control-static">vCORE</label>
-      </div>
-      <div class="col-md-4">
-        {{input type="text"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.vmCores
-          }}
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">Number of cores per VCPU of the VM to be created</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-2 form-label">
-        <label class="form-control-static">VM Memory</label>
-      </div>
-      <div class="col-md-4">
-        <div class="input-group">
-          {{input type="text"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.vmMem
-          }}
-          <span class="input-group-addon">MB</span>
+      <div class="row inline-form">        
+        <div class="col span-2 col-inline">
+          <label class="acc-label">Endpoint</label>
+        </div>
+        <div class="col span-10">
+          {{ input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.endpoint placeholder="ip/fqdn:port"}}
         </div>
       </div>
-      <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">Memory of the VM to be created (MB)</p>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-2 form-label">
-        <label class="form-control-static">VM Image</label>
+      <div class="row inline-form">        
+        <div class="col span-2 col-inline">
+          <label class="acc-label">Username</label>
+        </div>
+        <div class="col span-10">
+          {{ input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.username placeholder="username"}}
+        </div>
       </div>
-      <div class="col-md-4">
-        {{input type="text"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.vmImage
-          }}
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">The name of the VM disks to clone from, for the newly created VM</p>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-2 form-label">
-        <label class="form-control-static">VM Network</label>
+      <div class="row inline-form">        
+        <div class="col span-2 col-inline">
+          <label class="acc-label">Password</label>
+        </div>
+        <div class="col span-10">
+          {{ input type="password" class="form-control" value=model.%%DRIVERNAME%%Config.password placeholder="password"}}
+        </div>
       </div>
-      <div class="col-md-4">
-        {{input type="text"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.vmNetwork
-          }}
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">The name of the network to attach to the newly created VM</p>
-      </div>
-    </div>
 
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">Account provided need to have Cluster Admin role</p>
+      </div>
+
+      {{/accordion-list-item}}
+
+      {{#accordion-list-item 
+        title="2. Instance Options"
+        detail="Choose the size and OS of the virtual machine"
+        expandOnInit=true
+        expand=(action expandFn)
+      }}
+
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">vCPU(s)</label>
+          {{input inputmode="numeric" pattern="[0-9]*" min=1 max=32 type="text" class="form-control" value=model.%%DRIVERNAME%%Config.vmCpus }}
+        </div>
+        <div class="col span-6">
+          <label class="acc-label">Number Of Cores Per vCPU</label>
+          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.vmCores }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">Memory</label>
+          <div class="input-group">
+            {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.vmMem }}
+            <div class="input-group-addon bg-default">MiB</div>
+          </div>
+        </div>
+        <div class="col span-6">
+          <label class="acc-label">Disk</label>
+          <div class="input-group">
+            {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.disk }}
+            <div class="input-group-addon bg-default">GB</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col span-12">
+          <label class="acc-label">Disk Image</label>
+          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.vmImage }}
+          <p class="help-block">
+            Name of the template to use from image library
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col span-12">
+          <label class="acc-label">Network</label>
+          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.vmNetwork }}
+          <p class="help-block">
+            Name of the network to connect VM 
+          </p>
+          <div></div>
+        </div>
+      </div>
+
+
+      {{/accordion-list-item}}
+
+
+    {{/accordion-list}}
 
     {{!-- This following contains the Name, Labels and Engine Options fields --}}
     <div class="over-hr"><span>{{templateOptionsTitle}}</span></div>

@@ -46,13 +46,11 @@ export default Ember.Component.extend(NodeDriver, {
     let config = this.get('store').createRecord({
       type: '%%DRIVERNAME%%Config',
       username: "admin",
-      vmCpus: 1,
+      vmCpus: 2,
       vmCores: 1,
-      vmMem: 1024,
-      vmImage: "docker-img",
+      vmMem: 2048,
+      vmImage: "CentOS-7-2009",
       vmNetwork: "default",
-
-
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);
